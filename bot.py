@@ -136,6 +136,26 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("Process cancelled.")
     return ConversationHandler.END
 
+import os
+import threading
+from http.server import HTTPServer, BaseHTTPRequestHandler
+
+# --- Render port timeout fix ---
+class SimpleHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b"CoinBridge Bot is alive and running!")
+
+def run_dummy_server():
+    port = int(os.environ.get("PORT", 10000))
+    server = HTTPServer(("0.0.0.0", port), SimpleHandler)
+    server.serve_forever()
+
+# Background thread me HTTP server start kar rahe hain taaki Render khush rahe
+threading.Thread(target=run_dummy_server, daemon=True).start()
+# ---------------------------------
+
 if __name__ == '__main__':
     TOKEN = "9033084725:AAGuYW5s9A4ZXrXYn35NWlrFNIMrMaRegm8"
     
