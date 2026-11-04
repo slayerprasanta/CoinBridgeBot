@@ -157,7 +157,7 @@ threading.Thread(target=run_dummy_server, daemon=True).start()
 # ---------------------------------
 
 if __name__ == '__main__':
-    TOKEN = "9033084725:AAGuYW5s9A4ZXrXYn35NWlrFNIMrMaRegm8"
+    TOKEN = "9033084725:AAHn--HdVjvG_IYkZu7EIzgRIeLOLXNyEAI"
     
     app = ApplicationBuilder().token(TOKEN).build()
     
